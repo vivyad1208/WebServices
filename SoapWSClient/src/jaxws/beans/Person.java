@@ -7,8 +7,20 @@
 
 package jaxws.beans;
 
+import javax.xml.namespace.QName;
+import javax.xml.rpc.encoding.Deserializer;
+
+import org.apache.axis.encoding.Serializer;
+import org.apache.axis.encoding.ser.BeanDeserializer;
+import org.apache.axis.encoding.ser.BeanSerializer;
+
 public class Person  implements java.io.Serializable {
-    private int age;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int age;
 
     private int id;
 
@@ -159,25 +171,17 @@ public class Person  implements java.io.Serializable {
     /**
      * Get Custom Serializer
      */
-    public static org.apache.axis.encoding.Serializer getSerializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanSerializer(
-            _javaType, _xmlType, typeDesc);
+    public static Serializer getSerializer( String mechType,  Class javaType, QName xmlType) {
+    	BeanSerializer serializer = new BeanSerializer(javaType, xmlType, typeDesc);
+        return serializer;
     }
 
     /**
      * Get Custom Deserializer
      */
-    public static org.apache.axis.encoding.Deserializer getDeserializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanDeserializer(
-            _javaType, _xmlType, typeDesc);
+    public static Deserializer getDeserializer( String mechType, Class javaType, QName xmlType) {
+    	BeanDeserializer deSerializer = new BeanDeserializer(javaType, xmlType, typeDesc);
+        return deSerializer;
     }
 
 }

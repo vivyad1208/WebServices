@@ -1,8 +1,8 @@
 package jaxws.service;
 
-public class PersonServiceImplProxy implements jaxws.service.PersonServiceImpl {
+public class PersonServiceImplProxy implements PersonServiceImpl {
   private String _endpoint = null;
-  private jaxws.service.PersonServiceImpl personServiceImpl = null;
+  private jaxws.service.PersonServiceImpl _personServiceImpl = null;
   
   public PersonServiceImplProxy() {
     _initPersonServiceImplProxy();
@@ -15,12 +15,12 @@ public class PersonServiceImplProxy implements jaxws.service.PersonServiceImpl {
   
   private void _initPersonServiceImplProxy() {
     try {
-      personServiceImpl = (new jaxws.service.PersonServiceImplServiceLocator()).getPersonServiceImpl();
-      if (personServiceImpl != null) {
+      _personServiceImpl = (new jaxws.service.PersonServiceImplServiceLocator()).getPersonServiceImpl();
+      if (_personServiceImpl != null) {
         if (_endpoint != null)
-          ((javax.xml.rpc.Stub)personServiceImpl)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
+          ((javax.xml.rpc.Stub)_personServiceImpl)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
         else
-          _endpoint = (String)((javax.xml.rpc.Stub)personServiceImpl)._getProperty("javax.xml.rpc.service.endpoint.address");
+          _endpoint = (String)((javax.xml.rpc.Stub)_personServiceImpl)._getProperty("javax.xml.rpc.service.endpoint.address");
       }
       
     }
@@ -33,39 +33,39 @@ public class PersonServiceImplProxy implements jaxws.service.PersonServiceImpl {
   
   public void setEndpoint(String endpoint) {
     _endpoint = endpoint;
-    if (personServiceImpl != null)
-      ((javax.xml.rpc.Stub)personServiceImpl)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
+    if (_personServiceImpl != null)
+      ((javax.xml.rpc.Stub)_personServiceImpl)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
     
   }
   
   public jaxws.service.PersonServiceImpl getPersonServiceImpl() {
-    if (personServiceImpl == null)
+    if (_personServiceImpl == null)
       _initPersonServiceImplProxy();
-    return personServiceImpl;
+    return _personServiceImpl;
   }
   
   public boolean addPerson(jaxws.beans.Person p) throws java.rmi.RemoteException{
-    if (personServiceImpl == null)
+    if (_personServiceImpl == null)
       _initPersonServiceImplProxy();
-    return personServiceImpl.addPerson(p);
+    return _personServiceImpl.addPerson(p);
   }
   
   public jaxws.beans.Person getPerson(int id) throws java.rmi.RemoteException{
-    if (personServiceImpl == null)
+    if (_personServiceImpl == null)
       _initPersonServiceImplProxy();
-    return personServiceImpl.getPerson(id);
+    return _personServiceImpl.getPerson(id);
   }
   
   public boolean deletePerson(int id) throws java.rmi.RemoteException{
-    if (personServiceImpl == null)
+    if (_personServiceImpl == null)
       _initPersonServiceImplProxy();
-    return personServiceImpl.deletePerson(id);
+    return _personServiceImpl.deletePerson(id);
   }
   
   public jaxws.beans.Person[] getAllPersons() throws java.rmi.RemoteException{
-    if (personServiceImpl == null)
+    if (_personServiceImpl == null)
       _initPersonServiceImplProxy();
-    return personServiceImpl.getAllPersons();
+    return _personServiceImpl.getAllPersons();
   }
   
   
